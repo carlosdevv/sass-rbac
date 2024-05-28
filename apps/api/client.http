@@ -16,3 +16,11 @@ content-type: application/json
     "email": "test@acme.com",
     "password": "password"
 }
+
+###
+
+GET http://localhost:3333/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YmVhODMwZS0yNTkzLTRmNDMtOTU2NS1lOTMyYjBlNzQ4MGMiLCJpYXQiOjE3MTY5NDAzMjEsImV4cCI6MTcxNzU0NTEyMX0.EVC7kooKTpsSN3Z5tUDtryfI0x5B2-l9kB9YPHPtuZk
+
+###
+
