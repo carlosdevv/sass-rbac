@@ -14,7 +14,7 @@ content-type: application/json
 
 {
     "email": "test@acme.com",
-    "password": "password"
+    "password": "password1"
 }
 
 ###
@@ -24,3 +24,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YmVhODMwZ
 
 ###
 
+POST http://localhost:3333/password/recover
+content-type: application/json
+
+{
+    "email": "test@acme.com"
+}
+
+###
+
+POST http://localhost:3333/password/reset
+content-type: application/json
+
+{
+    "code": "8d0e474f-0887-44b1-a9a6-994479ab0c91",
+    "password": "password1"
+}
