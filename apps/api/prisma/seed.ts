@@ -5,6 +5,7 @@ import { hash } from 'bcryptjs'
 const prisma = new PrismaClient()
 
 async function seed() {
+  // pnpm prisma db seed
   await prisma.organization.deleteMany()
   await prisma.user.deleteMany()
 

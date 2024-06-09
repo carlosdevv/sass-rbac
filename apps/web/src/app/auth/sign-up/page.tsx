@@ -7,9 +7,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 
+import { signInWithEmailAndPassword } from '../sign-in/actions'
+
 export default function SignUpPage() {
   return (
-    <form action="" className="space-y-4">
+    <form action={signInWithEmailAndPassword} className="space-y-4">
       <div className="space-y-1">
         <Label htmlFor="name">Name</Label>
         <Input name="name" id="name" />
