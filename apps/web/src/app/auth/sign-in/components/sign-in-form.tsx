@@ -1,6 +1,6 @@
 'use client'
 
-import { AlertTriangle, EyeIcon, EyeOffIcon, LoaderIcon } from 'lucide-react'
+import { AlertTriangle, EyeIcon, EyeOffIcon, Loader } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { useFormState } from '@/hooks/use-form-state'
 
+import { signInWithGithub } from '../../actions'
 import { signInWithEmailAndPassword } from '../actions'
 
 export function SignInForm() {
@@ -32,81 +33,85 @@ export function SignInForm() {
   )
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {success === false && message && (
-        <Alert variant="destructive">
-          <AlertTriangle className="size-4" />
-          <AlertTitle>Sign in failed!</AlertTitle>
-          <AlertDescription>
-            <p>{message}</p>
-          </AlertDescription>
-        </Alert>
-      )}
-
-      <div className="space-y-1">
-        <Label htmlFor="email">E-mail</Label>
-        <Input name="email" type="email" id="email" />
-
-        {errors?.email && (
-          <p className="text-xs font-medium text-red-500 dark:text-red-400">
-            {errors.email[0]}
-          </p>
+    <div className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {success === false && message && (
+          <Alert variant="destructive">
+            <AlertTriangle className="size-4" />
+            <AlertTitle>Sign in failed!</AlertTitle>
+            <AlertDescription>
+              <p>{message}</p>
+            </AlertDescription>
+          </Alert>
         )}
-      </div>
 
-      <div className="space-y-2">
-        <div className="flex w-full items-center justify-between pr-2">
-          <Label htmlFor="password">Password</Label>
-          {showPassword ? (
-            <EyeIcon
-              className="size-4 cursor-pointer"
-              onClick={() => setShowPassword(false)}
-            />
-          ) : (
-            <EyeOffIcon
-              className="size-4 cursor-pointer"
-              onClick={() => setShowPassword(true)}
-            />
+        <div className="space-y-1">
+          <Label htmlFor="email">E-mail</Label>
+          <Input name="email" type="email" id="email" />
+
+          {errors?.email && (
+            <p className="text-xs font-medium text-red-500 dark:text-red-400">
+              {errors.email[0]}
+            </p>
           )}
         </div>
-        <Input
-          name="password"
-          type={showPassword ? 'text' : 'password'}
-          id="password"
-        />
 
-        {errors?.password && (
-          <p className="text-xs font-medium text-red-500 dark:text-red-400">
-            {errors.password[0]}
-          </p>
-        )}
+        <div className="space-y-1">
+          <div className="flex w-full items-center justify-between pr-2">
+            <Label htmlFor="password">Password</Label>
+            {showPassword ? (
+              <EyeIcon
+                className="size-4 cursor-pointer"
+                onClick={() => setShowPassword(false)}
+              />
+            ) : (
+              <EyeOffIcon
+                className="size-4 cursor-pointer"
+                onClick={() => setShowPassword(true)}
+              />
+            )}
+          </div>
+          <Input
+            name="password"
+            type={showPassword ? 'text' : 'password'}
+            id="password"
+          />
 
-        <Link
-          href="/auth/forgot-password"
-          className="text-xs font-medium text-foreground hover:underline"
-        >
-          Forgot your password?
-        </Link>
-      </div>
+          {errors?.password && (
+            <p className="text-xs font-medium text-red-500 dark:text-red-400">
+              {errors.password[0]}
+            </p>
+          )}
 
-      <Button className="w-full" type="submit" disabled={isPending}>
-        {isPending ? (
-          <LoaderIcon className="size-4 animate-spin" />
-        ) : (
-          'Sign in with e-mail'
-        )}
-      </Button>
+          <Link
+            href="/auth/forgot-password"
+            className="text-xs font-medium text-foreground hover:underline"
+          >
+            Forgot your password?
+          </Link>
+        </div>
 
-      <Button className="w-full" variant="link" size="sm" asChild>
-        <Link href="/auth/sign-up">Create new account</Link>
-      </Button>
+        <Button className="w-full" type="submit" disabled={isPending}>
+          {isPending ? (
+            <Loader className="size-4 animate-spin" />
+          ) : (
+            'Sign in with e-mail'
+          )}
+        </Button>
+
+        <Button className="w-full" variant="link" size="sm" asChild>
+          <Link href="/auth/sign-up">Create new account</Link>
+        </Button>
+      </form>
 
       <Separator />
 
-      <Button type="submit" className="w-full" variant="outline">
-        <Image src={githubIcon} alt="" className="mr-2 size-4 dark:invert" />
-        Sign in with GitHub
-      </Button>
-    </form>
+      <form action={signInWithGithub}>
+        <Button type="submit" className="w-full" variant="outline">
+          <Image src={githubIcon} alt="" className="mr-2 size-4 dark:invert" />
+          Sign in with GitHub
+        </Button>
+      </form>
+    </div>
   )
 }
