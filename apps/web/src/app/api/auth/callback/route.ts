@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { signInWithGithub } from '@/http/sign-in-with-github'
+import { signInWithGithub } from '@/http/auth/sign-in-with-github'
 import { setInCookies } from '@/lib/helpers'
 
 export async function GET(request: NextRequest) {
