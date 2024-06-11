@@ -3,7 +3,7 @@
 import { HTTPError } from 'ky'
 import { z } from 'zod'
 
-import { signInWithPassword } from '@/http/sign-in-with-password'
+import { signInWithPassword } from '@/http/auth/sign-in-with-password'
 import { setInCookies } from '@/lib/helpers'
 
 const signInSchema = z.object({
