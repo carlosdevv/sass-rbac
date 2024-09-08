@@ -3,7 +3,7 @@
 import { AlertTriangle, EyeIcon, EyeOffIcon, Loader } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
 import githubIcon from '@/assets/github-icon.svg'
@@ -20,6 +20,7 @@ import { signInWithEmailAndPassword } from '../actions'
 export function SignInForm() {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
+  const searchParams = useSearchParams()
   // const [{ errors, message, success }, formAction, isPending] = useActionState(
   //   signInWithEmailAndPassword,
   //   { success: false, message: null, errors: null },
@@ -47,7 +48,12 @@ export function SignInForm() {
 
         <div className="space-y-1">
           <Label htmlFor="email">E-mail</Label>
-          <Input name="email" type="email" id="email" />
+          <Input
+            name="email"
+            type="email"
+            id="email"
+            defaultValue={searchParams.get('email') ?? ''}
+          />
 
           {errors?.email && (
             <p className="text-xs font-medium text-red-500 dark:text-red-400">
